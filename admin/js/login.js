@@ -34,7 +34,8 @@ $(function(){
                     // 跳转只有在模态框消失之后再跳转
                     // hidden.bs.modal	此事件在模态框被隐藏（并且同时在 CSS 过渡效果完成）之后被触发。
                     $('#myModal').on('hidden.bs.modal', function (e) {
-                        console.log(e)
+                        // 存储一定要在跳转之前存储
+                        localStorage.setItem('heban_bignews_token',res.token)
                         location.href='./index.html'
                     })
                 }else{
