@@ -6,7 +6,7 @@ $(function(){
 
     // 页面一加载，就请求用户信息
     $.ajax({
-        url:'http://localhost:8080/api/v1/admin/user/info',
+        url:BigNew.user_info,
         dataType:'json',
         // 通过请求头的方式传递token数据，并且键只能使用Authorization
         // headers:

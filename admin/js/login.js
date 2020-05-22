@@ -17,7 +17,8 @@ $(function(){
         // 任何请求之后，一定要查阅接口文档
         $.ajax({
             type:'post',
-            url:'http://localhost:8080/api/v1/admin/user/login',
+            // url:'http://localhost:8080/api/v1/admin/user/login',
+            url:BigNew.user_login,
             // ajax支持的 参数类型常见的有：key=value&key=value   {key:value}   formdata
             // 属性名称一定要参照后台接口
             data:{
