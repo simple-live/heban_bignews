@@ -25,6 +25,7 @@ $(function () {
     // 6、新增文章类别
     // 请求地址：/admin/category/add
     // 请求方式：post
+    // .btnadd是新增按钮
     $('.btnadd').on('click', function () {
         // 收集数据
         let name = $('#name').val()
@@ -72,6 +73,7 @@ $(function () {
 
     // 分类数据的编辑--使用事件委托
     // 单击编辑按钮仅仅：弹出模态框  + 数据的默认展示
+    // 动态生成的模板需要用事件委托
     $('tbody').on('click', '.btnedit', function () {
         // data:获取当前元素中的所有自定义属性,这个data()获取到的是一个对象
         // 对象解构
