@@ -1,4 +1,5 @@
 $(function () {
+    let temp = {} // 记录当前分类数据编辑前的值
     // 1.动态渲染分类数据
     // 5、所有文章类别
     // 请求地址：/admin/category/list
@@ -37,15 +38,19 @@ $(function () {
         // 判断应该执行的操作
         if ($('.btnadd').text() == '新增') {
             // ajax--新增
-           opt(BigNew.category_add,{name,slug})
+            opt(BigNew.category_add, { name, slug })
         } else {
-            // ajax--编辑,编辑需要传入id参数做为条件
-            opt(BigNew.category_edit,{name,slug,id:$('#id').val()})
+            if (temp.name == name && temp.slug == slug) {
+                alert('编辑操作主动至少修改其中一个值，否则取消当前操作')
+            } else {
+                // ajax--编辑,编辑需要传入id参数做为条件
+                opt(BigNew.category_edit, { name, slug, id: $('#id').val() })
+            }
         }
     })
 
     // 实现新增或编辑
-    function opt(url,data){
+    function opt(url, data) {
         $.ajax({
             type: 'post',
             url: url,
@@ -67,6 +72,10 @@ $(function () {
                     // 刷新--局部刷新
                     init()
                 }
+            },
+            error:function(err){
+                console.log(err)
+                alert(err.responseJSON.msg)
             }
         })
     }
@@ -78,6 +87,7 @@ $(function () {
         // data:获取当前元素中的所有自定义属性,这个data()获取到的是一个对象
         // 对象解构
         let { id, name, slug } = $(this).data()
+        temp = { name, slug } // 记录分类数据在编辑前的值
         // console.log(id,name,slug)
         // let id = $(this).data('id')
         // let id = $(this).data().id
@@ -99,5 +109,13 @@ $(function () {
         // 顺便修改下页面元素的内容
         $('.modal-title').text('新增分类')
         $('.btnadd').text('新增')
+    })
+
+    // 模态框中的取消
+    // $('.btncancel').on('click',function(){
+    //     $('form')[0].reset()
+    // })
+    $('#myModal').on('hidden.bs.modal', function (e) {
+        $('form')[0].reset()
     })
 })
