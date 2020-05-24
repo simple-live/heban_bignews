@@ -81,7 +81,7 @@
                 <td>{{$value.slug}}</td>
                 <td class="text-center">
                     <input type='button' data-toggle="modal" data-target='#myModal' class="btn btn-info btn-xs btnedit" data-name='{{$value.name}}' data-slug='{{$value.slug}}' data-id='{{$value.id}}' value='编辑'>
-                    <input type='button' class="btn btn-danger btn-xs btndel" data-id='{{$value.id}}' value='删除'>
+                    <input type='button' class="btn btn-danger btn-xs btndel" value='删除' data-id='{{$value.id}}'>
                 </td>
             </tr>
         {{/each}}
