@@ -116,4 +116,29 @@ $(function () {
     $('#myModal').on('hidden.bs.modal', function (e) {
         $('form')[0].reset()
     })
+
+    // 实现分类数据的删除
+    // 9、删除文章类别
+    // 请求地址：/admin/category/delete
+    // 请求方式：post
+
+    $('tbody').on('click','.btndel',function(){
+        // 1.获取id
+        let id = $(this).data('id')
+        if(window.confirm('请问是否真的需要删除？')){
+            $.ajax({
+                type:'post',
+                url:BigNew.category_delete,
+                data:{id},
+                dataType:'json',
+                success:function(res){
+                    console.log(res)
+                    if(res.code == 204){
+                        alert(res.msg)
+                        init()
+                    }
+                }
+            })
+        }
+    })
 })
