@@ -25,7 +25,6 @@ $(function(){
     // 6、新增文章类别
     // 请求地址：/admin/category/add
     // 请求方式：post
-
     $('.btnadd').on('click',function(){
         // 收集数据
         let name = $('#name').val()
@@ -56,5 +55,33 @@ $(function(){
                 }
             }
         })
+    })
+
+    // 分类数据的编辑--使用事件委托
+    // 单击编辑按钮仅仅：弹出模态框  + 数据的默认展示
+    $('tbody').on('click','.btnedit',function(){
+        // data:获取当前元素中的所有自定义属性
+        // 对象解构
+        let {id,name,slug} = $(this).data()
+        // console.log(id,name,slug)
+        // let id = $(this).data('id')
+        // let name = $(this).data('name')
+        // let slug = $(this).data('slug')
+        console.log(id,name,slug)
+        $('#name').val(name)
+        $('#slug').val(slug)
+        // 以隐藏域的方式存储id
+        $('#id').val(id)
+
+        // 顺便修改下页面元素的内容
+        $('.modal-title').text('编辑分类')
+        $('.btnadd').text('编辑')
+    })
+
+    // 实现单击新增时修改元素的内容
+    $('#xinzengfenlei').on('click',function(){
+        // 顺便修改下页面元素的内容
+        $('.modal-title').text('新增分类')
+        $('.btnadd').val('新增')
     })
 })
