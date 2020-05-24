@@ -5,7 +5,7 @@ $(function(){
     // 请求方式：post
 
     $('.input_sub').on('click',function(e){
-        e.preventDefault() // 阻止按钮的默认行为。sibmit有默认的提交行为
+        // e.preventDefault() // 阻止按钮的默认行为。sibmit有默认的提交行为
         var username = $('.input_txt').val().trim();
         var password = $('.input_pass').val().trim();
         //4.非空判断
