@@ -118,4 +118,21 @@ $(function () {
     $('#myModal').on('hidden.bs.modal', function (e) {
         $('form')[0].reset()
     })
+
+    $('tbody').on('click', '.btndel', function () {
+        let id = $(this).attr('data-id')
+        $.ajax({
+            type: 'post',
+            dataType: 'json',
+            data:{id},
+            url:BigNew.category_delete,
+            success: function (res) {
+                console.log(res);
+                if (res.code == 204) {
+                    alert(res.msg)
+                    init()
+                }
+            }
+       })
+    })
 })
