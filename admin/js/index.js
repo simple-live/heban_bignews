@@ -23,7 +23,7 @@ $(function(){
                 $('.user_info > span').html('欢迎你&nbsp;&nbsp;'+res.data.nickname)
             }
         },
-        // 使用error专门处理请求失败的场景
+        // 使用error专门处理请求失败的场景：token无效的时候的请求是请求失败，不是成功，它不会触发success
         // error:function(err){
         //     console.log(err)
         //     if(err.statusText == 'Forbidden'){ // Forbidden说明token已过期

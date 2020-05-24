@@ -21,6 +21,7 @@ $(function(){
 
 
     // 一选择好文件就实现文件预览
+    // 只是实现预览，并没有实现文件的上传
     $('#exampleInputFile').on('change',function(){
         // 1.获取当前的所选择的文件对象
         let myfile = this.files[0]
@@ -40,7 +41,7 @@ $(function(){
         $.ajax({
             type:'post',
             url:BigNew.user_edit,
-            data:new FormData($('#form')[0]),//formdata能不能收集图片数据
+            data:new FormData($('#form')[0]),//formdata能不能收集图片数据？能
             dataType:'json',
             processData:false, // 不用ajax来进行数据的处理
             contentType:false, // 不让ajax来进行数据的编码处理
@@ -48,6 +49,8 @@ $(function(){
                 console.log(res)
                 if(res.code == 200){
                     alert(res.msg)
+                    // 刷新上级页面
+                    window.parent.location.reload()
                 }
             }
         })
