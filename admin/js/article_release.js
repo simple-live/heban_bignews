@@ -46,17 +46,46 @@ $(function () {
         ]
     });
 
-    // 发表文章
+    // 发表文章和存储为草稿
+    function publish(state){
+        let formdata = new FormData($('#form')[0])
+        // 单独的追加文章内容
+        formdata.append('content',tinymce.activeEditor.getContent())
+        // 添加文章类型：已发布|草稿
+        formdata.append('state',state)
+        $.ajax({
+            type:'post',
+            url:BigNew.article_publish,
+            data:formdata,
+            dataType:'json',
+            processData:false,
+            contentType:false,
+            success:function(res){
+                console.log(res)
+                if(res.code == 200){
+                    alert(res.msg)
+                    location.href='./article_list.html'
+                }
+            }
+        })
+    }
+    // 11、发布文章
+    // 请求地址：/admin/article/publish
+    // 请求方式：post
+
     $('.btn-release').on('click', function (e) {
         e.preventDefault()
         // activeEditor:当前的富文本框
         // getContent():可以获取当前文本框的内容
         // console.log(tinymce.activeEditor.getContent())
         // FormData:传入的表单必须是dom元素
-        let formdata = new FormData($('#form')[0])
-        // 单独的追加文章内容
-        formdata.append('content',tinymce.activeEditor.getContent())
-        console.log(...formdata)
+        publish('已发布')
+    })
+
+    // 存储为草稿
+    $('.btn-draft').on('click',function(e){
+        e.preventDefault()
+        publish('草稿')
     })
 
 })
