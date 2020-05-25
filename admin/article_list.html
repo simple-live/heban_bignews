@@ -34,7 +34,8 @@
                             <option value="草稿">草稿</option>
                             <option value="已发布">已发布</option>
                         </select>
-                        <!-- button特性和submit,会有默认的提交行为 -->
+                        <!--<input type='submit'> 
+                            button特性和submit,会有默认的提交行为 -->
                         <button id="btnSearch" class="btn btn-default btn-sm">筛选</button>
                     </form>
                 </div>
@@ -80,7 +81,7 @@
                 <td class="text-center">{{$value.state}}</td>
                 <td class="text-center">
                     <a href="article_edit.html" class="btn btn-default btn-xs">编辑</a>
-                    <a href="javascript:void(0);" class="btn btn-danger btn-xs delete">删除</a>
+                    <a href="javascript:void(0);" data-id='{{$value.id}}' class="btn btn-danger btn-xs btndelete">删除</a>
                 </td>
             </tr>
         {{/each}}
