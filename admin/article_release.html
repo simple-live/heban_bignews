@@ -10,10 +10,14 @@
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/iconfont.css">
     <link rel="stylesheet" href="css/main.css">
+    <!-- 引入jeDate的样式 -->
+    <link rel="stylesheet" href="./libs/jedate/css/jedate.css">
     <!-- jq -->
     <script src="./libs/jquery-1.12.4.min.js"></script>
     <!-- 模板引擎 -->
     <script src="./libs/template-web.js"></script>
+    <!-- 引入jeDate的js文件 -->
+    <script src="./libs/jedate/js/jedate.js"></script>
 </head>
 
 <body>
@@ -46,6 +50,7 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">发布时间：</label>
                     <div class="col-sm-4">
+                        <input type="text" placeholder="请选择日期" readonly name="date" id="artcileDate" class="jeinput">
                     </div>
                 </div>
                 <div class="form-group">

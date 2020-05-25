@@ -21,12 +21,18 @@ $(function () {
             }
         }
     })
-
+    // 3.日期插件初始化
+    jeDate('#artcileDate', {
+        trigger: 'click',
+        theme:{bgcolor:'orange',pnColor:'bule'},
+        format: 'YYYY-MM-DD',
+        isinitVal:true
+    })
     // 发表文章
     $('.btn-release').on('click',function(e){
         e.preventDefault()
         // FormData:传入的表单必须是dom元素
-        // let formdata = new FormData($('#form')[0])
-        console.log($('.category').val())
+        let formdata = new FormData($('#form')[0])
+        console.log(...formdata)
     })
 })
