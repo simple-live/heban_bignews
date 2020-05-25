@@ -26,16 +26,36 @@ $(function () {
     jeDate('#artcileDate', {
         trigger: 'click',
         // bgcolor:背景色   pnColor：本月和下月及上月的分隔色
-        theme: { bgcolor:"orange",pnColor:"blue" },//red色主题
+        theme: { bgcolor: "orange", pnColor: "blue" },//red色主题
         format: "YYYY-MM-DD",
         isinitVal: true,
     })
 
+    // 初始化富文本框
+    tinymce.init({
+        selector: '#articlecontent',
+        height:'350px',
+        language: 'zh_CN',
+        branding:false,// 清除询问的标识
+        toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | code",
+        plugins: [
+            "advlist autolink lists link image charmap print preview anchor",
+            "searchreplace visualblocks code fullscreen",
+            "insertdatetime media table contextmenu paste imagetools wordcount",
+            "code"
+        ]
+    });
+
     // 发表文章
-    $('.btn-release').on('click',function(e){
+    $('.btn-release').on('click', function (e) {
         e.preventDefault()
+        // activeEditor:当前的富文本框
+        // getContent():可以获取当前文本框的内容
+        // console.log(tinymce.activeEditor.getContent())
         // FormData:传入的表单必须是dom元素
         let formdata = new FormData($('#form')[0])
+        // 单独的追加文章内容
+        formdata.append('content',tinymce.activeEditor.getContent())
         console.log(...formdata)
     })
 
