@@ -24,8 +24,12 @@ $(function(){
                 if(res.code == 200){
                     // 渲染文章列表
                     $('tbody').html(template('articleTemp',res.data))
-                    // 渲染分页结构  totalPage:直接返回了总页数
-                    setPage(res.data.totalPage)
+                    if(res.data.totalPage > 1){
+                        // 渲染分页结构  totalPage:直接返回了总页数
+                        setPage(res.data.totalPage)
+                    }else{
+                        setPage(1)
+                    }
                 }
             }
         })
@@ -82,5 +86,34 @@ $(function(){
         page = 1
         // 调用ajax根据搜索条件发起数据请求
         init()
+    })
+
+    // 实现文章的删除
+    // 14、删除文章
+    // 请求地址：/admin/article/delete
+    // 请求方式：post
+    $('tbody').on('click','.btndelete',function(e){
+        e.preventDefault()
+        let id = $(this).data('id')
+        $.ajax({
+            type:'post',
+            url:BigNew.article_delete,
+            data:{id},
+            dataType:'json',
+            success:function(res){
+                console.log(res)
+                if(res.code == 204){
+                    alert(res.msg)
+                    // 删除和刷新是两个不同的操作
+                    // 代码到了这一步，删除已经完成了
+                    if($('tbody').find('tr').length == 1){
+                        if(page > 1){ // 说明现在不是第一页，才有得减
+                            page --
+                        }
+                    }
+                    init()
+                }
+            }
+        })
     })
 })
