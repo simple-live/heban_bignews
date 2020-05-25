@@ -9,7 +9,7 @@ $(function () {
         $('.article_cover').attr('src', url)
     })
 
-    // 实现分类数据的动态渲染
+    // 2.实现分类数据的动态渲染
     $.ajax({
         url: BigNew.category_list,
         dataType: 'json',
@@ -22,11 +22,21 @@ $(function () {
         }
     })
 
+    // 3.日期插件初始化
+    jeDate('#artcileDate', {
+        trigger: 'click',
+        // bgcolor:背景色   pnColor：本月和下月及上月的分隔色
+        theme: { bgcolor:"orange",pnColor:"blue" },//red色主题
+        format: "YYYY-MM-DD",
+        isinitVal: true,
+    })
+
     // 发表文章
     $('.btn-release').on('click',function(e){
         e.preventDefault()
         // FormData:传入的表单必须是dom元素
-        // let formdata = new FormData($('#form')[0])
-        console.log($('.category').val())
+        let formdata = new FormData($('#form')[0])
+        console.log(...formdata)
     })
+
 })
