@@ -12,7 +12,11 @@ $(function(){
             url:BigNew.article_query,
             data:{
                 page,
-                perpage
+                perpage,
+                // 添加文章分类参数
+                type: $('#selCategory').val(),
+                // 添加文章状态参数
+                state: $('#selStatus').val()
             },
             dataType:'json',
             success:function(res){
@@ -44,10 +48,39 @@ $(function(){
                 // init()
                 // cpage就是我们当前所单击的页码值，意味着我们只需要按照这个页码值进行ajax请求，就能够获取到当前页的数据
                 console.log(cpage)
-                page = cpage
-                // 根据新的页码值重新发起请求
-                init()
+                if(page != cpage){
+                    page = cpage
+                    // 根据新的页码值重新发起请求
+                    init()
+                }
             }
         })
     }
+
+
+    // 动态加载文章分类数据
+    $.ajax({
+        url: BigNew.category_list,
+        dataType: 'json',
+        success: function (res) {
+            console.log(res)
+            if (res.code == 200) {
+                // 模板中使用的是我们所传递的数据对象的属性名称
+                $('#selCategory').html(template('cateTemp', res))
+            }
+        }
+    })
+
+
+    // 实现文章数据的筛选
+    $('#btnSearch').on('click',function(e){
+        e.preventDefault()
+        // let type = $('#selCategory').val()
+        // let state = $('#selStatus').val()
+        // console.log(type,state)
+        // 筛选之后，我们应该将页码重置为1
+        page = 1
+        // 调用ajax根据搜索条件发起数据请求
+        init()
+    })
 })
