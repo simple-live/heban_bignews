@@ -12,7 +12,11 @@ $(function(){
             url:BigNew.article_query,
             data:{
                 page,
-                perpage
+                perpage,
+                // 添加文章分类参数
+                type: $('#selCategory').val(),
+                // 添加文章状态参数
+                state: $('#selStatus').val()
             },
             dataType:'json',
             success:function(res){
@@ -65,5 +69,18 @@ $(function(){
                 $('#selCategory').html(template('cateTemp', res))
             }
         }
+    })
+
+
+    // 实现文章数据的筛选
+    $('#btnSearch').on('click',function(e){
+        e.preventDefault()
+        // let type = $('#selCategory').val()
+        // let state = $('#selStatus').val()
+        // console.log(type,state)
+        // 筛选之后，我们应该将页码重置为1
+        page = 1
+        // 调用ajax根据搜索条件发起数据请求
+        init()
     })
 })
