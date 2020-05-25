@@ -44,10 +44,26 @@ $(function(){
                 // init()
                 // cpage就是我们当前所单击的页码值，意味着我们只需要按照这个页码值进行ajax请求，就能够获取到当前页的数据
                 console.log(cpage)
-                page = cpage
-                // 根据新的页码值重新发起请求
-                init()
+                if(page != cpage){
+                    page = cpage
+                    // 根据新的页码值重新发起请求
+                    init()
+                }
             }
         })
     }
+
+
+    // 动态加载文章分类数据
+    $.ajax({
+        url: BigNew.category_list,
+        dataType: 'json',
+        success: function (res) {
+            console.log(res)
+            if (res.code == 200) {
+                // 模板中使用的是我们所传递的数据对象的属性名称
+                $('#selCategory').html(template('cateTemp', res))
+            }
+        }
+    })
 })
