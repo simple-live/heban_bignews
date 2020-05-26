@@ -64,6 +64,7 @@ $(function () {
                 console.log(res)
                 if(res.code == 200){
                     alert(res.msg)
+                    // 因为这个js文件是article_release.html引入的,所以引入其他的html路径应该是按照html的相对路径
                     location.href='./article_list.html'
                 }
             }
