@@ -116,4 +116,12 @@ $(function(){
             }
         })
     })
+
+    $('#release_btn').click(function(){
+        //$() :第一个参数：选择器  第二个参数：document，默认是当前窗口document
+      $('.level02>li:eq(1)',window.parent.document).addClass('active')
+      .siblings()
+      .removeClass('active');
+    });
+
 })
