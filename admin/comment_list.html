@@ -36,7 +36,7 @@
 
         </tbody>
       </table>
-      <div class="row text-center">
+      <div class="row text-right">
         <ul id="pagination" class="pagination-sm"></ul>
       </div>
 
@@ -51,8 +51,12 @@
         <td>{{$value.time}}</td>
         <td>{{$value.state}}</td>
         <td class="text-center">
-          <a href="javascript:void(0);;" class="btn btn-warning btn-xs">拒绝</a>
-          <a href="javascript:void(0);;" class="btn btn-danger btn-xs">删除</a>
+          {{if $value.state == '待审核'}}
+            <a href="javascript:void(0);;" class="btn btn-success btn-xs btnaccept" data-id='{{$value.id}}'>批准</a>
+          {{else if $value.state == '已通过'}}
+            <a href="javascript:void(0);;" class="btn btn-warning btn-xs btnreject" data-id='{{$value.id}}'>拒绝</a>
+          {{/if}}
+          <a href="javascript:void(0);;" class="btn btn-danger btn-xs btndel" data-id='{{$value.id}}'>删除</a>
         </td>
       </tr>
     {{/each}}

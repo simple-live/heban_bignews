@@ -46,4 +46,45 @@ $(function(){
             }
         })
     }
+
+    // 实现评论的批准，拒绝和删除
+    function commentOpt(url,id){
+        $.ajax({
+            type:'post',
+            url:url,
+            data:{id},
+            dataType:'json',
+            success:function(res){
+                console.log(res)
+                if(res.code == 200){
+                    alert(res.msg)
+                    init()
+                }
+            }
+        })
+    }
+
+    // 事件委托方式实现批准评论
+    // 20、评论审核通过
+    // 请求地址：/admin/comment/pass
+    // 请求方式：post
+    $('tbody').on('click','.btnaccept',function(e){
+        e.preventDefault()
+        commentOpt(BigNew.comment_pass,$(this).data('id'))
+    })
+
+    // 拒绝评论
+    // 21、评论审核不通过
+    // 请求地址：/admin/comment/reject
+    // 请求方式：post
+    $('tbody').on('click','.btnreject',function(e){
+        e.preventDefault()
+        commentOpt(BigNew.comment_reject,$(this).data('id'))
+    })
+
+    // 删除评论
+    $('tbody').on('click','.btndel',function(e){
+        e.preventDefault()
+        commentOpt(BigNew.comment_delete,$(this).data('id'))
+    })
 })
