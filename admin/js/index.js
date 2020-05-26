@@ -63,4 +63,14 @@ $(function(){
     $('.level02 > li').on('click',function(){
         $(this).addClass('active').siblings().removeClass('active')
     })
+
+    // 实现退出
+    $('.logout').on('click',function(){
+        // 删除token 
+        // removeItem:清除指定的本地存储
+        // clear:全部清除
+        localStorage.removeItem('heban_bignews_token')
+        // 退回到登陆页
+        location.href='./login.html'
+    })
 })
