@@ -28,4 +28,52 @@ $(function(){
             }
         }
     })
+
+    // 实现图片预览
+    $('#inputCover').change(function(){
+        let file = this.files[0]
+        let url = URL.createObjectURL(file)
+        $('.article_cover').attr('src',url)
+    })
+
+    // 13、文章编辑
+    // 请求地址：/admin/article/edit
+    // 请求方式：post
+    // 封装编辑和存为草稿方法
+    // state:当前的操作类型：发表|存为草稿
+    function opt(state){
+        // 使用formdata收集数据
+        let formdata = new FormData($('form')[0]) // title,cover,categoryId,data
+        // 文本内容
+        formdata.append('content',tinymce.activeEditor.getContent())
+        // 添加id条件
+        formdata.append('id',id)
+        // 状态
+        formdata.append('state',state)
+        $.ajax({
+            type:'post',
+            url:BigNew.article_edit,
+            data:formdata,
+            dataType:'json',
+            processData:false,
+            contentType:false,
+            success:function(res){
+                console.log(res)
+                if(res.code == 200){
+                    alert(res.msg)
+                    location.href='./article_list.html'
+                }
+            }
+        })
+    }
+    // 实现编辑
+    $('.btn-edit').on('click',function(e){
+        e.preventDefault()
+        opt('已发布')
+    })
+    // 存为草稿
+    $('.btn-draft').on('click',function(e){
+        e.preventDefault()
+        opt('草稿')
+    })
 })
