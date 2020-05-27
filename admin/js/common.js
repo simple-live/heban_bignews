@@ -42,6 +42,7 @@ let itcast = {
     getArguments:function(str){ //?id=2&name=jack 》》 {id:2,name:"jack"}
         let obj = {}
         // 1.去除？
+        // 可以获取从字符串中索引为1后面的所有值
         str = str.substring(1) // id=2&name=jack
         // 2.将str以&符合进行分隔
         let arr = str.split('&') // ["id=2","name=jack"]
