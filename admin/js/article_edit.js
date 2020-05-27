@@ -5,6 +5,8 @@ $(function(){
     // let id = location.search.split('=')[1]
     let id = itcast.getArguments(location.search).id
     
+
+    // 添加分类，应该是这个页面中写的，可能会 造成你的分类数据还没有成功的生成，但是文章数据已经获取到了，并进行赋值
     // 根据id获取文件详情数据
     // 12、根据id获取文章信息
     // 请求地址：/admin/article/search
